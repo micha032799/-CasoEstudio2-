@@ -31,19 +31,32 @@ namespace ApiCasoEstudio2.Controllers
 
         [System.Web.Http.HttpGet]
         [System.Web.Http.Route("AlquilerCasas")]
-        public List<CasasSistema> AlquilerCasas()
+        public List<System.Web.Mvc.SelectListItem> AlquilerCasas()
         {
             using (var context = new CasoEstudioMNEntities())
             {
                 context.Configuration.LazyLoadingEnabled = false;
 
-                var casasNoAlquiladas = context.CasasSistema
-                    .Where(c => c.FechaAlquiler == null && c.UsuarioAlquiler == null)
+                var casas = (from x in context.CasasSistema
+                             select x).ToList();
+
+                var listaFiltrada = casas
+                    .Where(c => c.PrecioCasa >= 115000 && c.PrecioCasa < 180000 && c.FechaAlquiler == null && c.UsuarioAlquiler == null)
+                    .OrderBy(c => c.FechaAlquiler)
+                    .ThenBy(c => c.UsuarioAlquiler)
                     .ToList();
 
-                return casasNoAlquiladas;
+                var respuesta = listaFiltrada.Select(item =>
+                    new System.Web.Mvc.SelectListItem { Value = item.IdCasa.ToString(), Text = item.DescripcionCasa }
+                ).ToList();
+
+                return respuesta;
             }
         }
+
+
+
+
         [System.Web.Http.HttpGet]
         [System.Web.Http.Route("ConsultaCasa")]
         public CasasSistema ConsultaCasa(long IdCasa)

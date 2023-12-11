@@ -1,7 +1,9 @@
-﻿using CasoEstudio2.Models;
+﻿using CasoEstudio2.Entities;
+using CasoEstudio2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 
@@ -20,7 +22,7 @@ namespace CasoEstudio2.Controllers
 
         public ActionResult AlquilerCasas()
         {
-            ViewBag.Alquiler = casasModel.AlquilerCasas().;
+            ViewBag.Alquiler = casasModel.AlquilerCasas();
             var datos = casasModel.ConsultaCasas();
             //var datos = casasModel.ConsultaCasa(IdCasa);
             return View(datos[1]);
