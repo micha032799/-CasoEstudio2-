@@ -43,5 +43,15 @@ namespace CasoEstudio2.Models
                 return res.Content.ReadFromJsonAsync<CasaEnt>().Result;
             }
         }
+        public string ActualizarAlquilerCasa(CasaEnt entidad)
+        {
+            using (var client = new HttpClient())
+            {
+                var url = urlApi + "ActualizarAlquilerCasa";
+                var jsonData = JsonContent.Create(entidad);
+                var res = client.PutAsync(url, jsonData).Result;
+                return res.Content.ReadFromJsonAsync<string>().Result;
+            }
+        }
     }
 }

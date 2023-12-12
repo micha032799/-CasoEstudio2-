@@ -76,5 +76,36 @@ namespace ApiCasoEstudio2.Controllers
                 return null;
             }
         }
+
+        [System.Web.Http.HttpPut]
+        [System.Web.Http.Route("ActualizarAlquilerCasa")]
+        public string ActualizarAlquilerCasa(CasasSistema casa)
+        {
+            try
+            {
+                using (var context = new CasoEstudioMNEntities())
+                {
+                    var data = context.CasasSistema.FirstOrDefault(x => x.IdCasa == casa.IdCasa);
+
+                    if (data != null)
+                    {
+                        data.UsuarioAlquiler = casa.UsuarioAlquiler;
+                        data.FechaAlquiler = casa.FechaAlquiler;
+
+                        context.SaveChanges();
+
+                        return "OK";
+                    }
+                    else
+                    {
+                        return "Casa no encontrada";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Error: " + ex.Message;
+            }
+        }
     }
 }

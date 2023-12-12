@@ -18,7 +18,7 @@
                     </div>
                 }
 
-                @using (Html.BeginForm("AlquilerCasas", "Casas", FormMethod.Post, new { @class = "pt-3" }))
+                @using (Html.BeginForm("ActualizarAlquilerCasa", "Casas", FormMethod.Post, new { @class = "pt-3" }))
                 {
                     @Html.HiddenFor(m => m.IdCasa)
 
@@ -27,11 +27,11 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        @Html.TextBox("Precio casa", null, new {  @class = "form-control form-control-lg", @placeholder = "Precio Casa", @readonly = "readonly", })
+                        @Html.TextBoxFor(m => m.PrecioCasa, new {  @class = "form-control form-control-lg", @placeholder = "Precio Casa", @readonly = "readonly", })
                     </div>
 
                     <div class="form-group mb-3">
-                        @Html.TextBox("Usuario alquiler", null, new { @class = "form-control form-control-lg", @placeholder = "Usuario alquiler" })
+                        @Html.TextBoxFor(m => m.UsuarioAlquiler, new { @class = "form-control form-control-lg", @placeholder = "Usuario Alquiler"})
                     </div>
 
                     <div class="mt-3">

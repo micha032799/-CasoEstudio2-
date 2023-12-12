@@ -2,15 +2,18 @@
 
 function ConsultarPrecio() {
 
-    let idCasa = $("#IdCasa").val();
+    let idCasa = $("#DescripcionCasa").val();
 
     if (idCasa.length > 0) {
 
         $.ajax({
-            url: 'https://localhost:44314/ConsultaCasa?IdCasa=' + idCasa,
+            url: '/Casas/ConsultaCasa',
+            data: {
+                'IdCasa': idCasa
+            },
             type: "GET",
             success: function (data) {
-                $("#PrecioCasa").val(data.precio);
+                $("#PrecioCasa").val(data);
             }
         });
 
